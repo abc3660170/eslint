@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+const cwd = process.cwd();
+var fs = require('fs');
+var path = require('path');
+var run = require('../lib/index.js').main;
+
+const pkg = path.resolve(cwd, 'package.json')
+try {
+ fs.readFileSync(pkg);
+} catch(e) {
+ console.error('当前目录下没有package.json,请你找个项目根目录下执行这个命令！')
+ process.exit(-1);
+}
+
+run(cwd);

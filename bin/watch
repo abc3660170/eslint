@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+const cwd = process.cwd();
+var fs = require('fs');
+var path = require('path');
+var run = require('../lib/index.js').watch;
+
+const pkg = path.resolve(cwd, '.idea/workspace.xml')
+try {
+ fs.readFileSync(pkg);
+} catch(e) {
+ console.error('这不是一个标准的webstorm项目,请在webstorm目录下执行这个命令！')
+ process.exit(-1);
+}
+
+run(cwd);
